@@ -1,8 +1,12 @@
 # frozen_string_literal: true
+#
+#
 
 require_relative '../lib/domeapi'
 
 require 'minitest/autorun'
+require 'minitest/spec'
+require 'shoulda/context'
 require 'webmock/minitest'
 require 'httpx'
 require 'httpx/adapters/webmock'

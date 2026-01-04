@@ -31,6 +31,22 @@ module Rubyists
         def orderbook
           @orderbook ||= Orderbook.new(client)
         end
+
+        def activity
+          @activity ||= Activity.new(client)
+        end
+
+        def market_price
+          @market_price ||= MarketPrice.new(client)
+        end
+
+        def wallet
+          @wallet ||= Wallet.new(client)
+        end
+
+        def wallet_profit_and_loss
+          @wallet_profit_and_loss ||= WalletProfitAndLoss.new(client)
+        end
       end
     end
   end
