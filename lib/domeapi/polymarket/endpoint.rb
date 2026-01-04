@@ -13,7 +13,7 @@ module Rubyists
         #
         # @return [void]
         def initialize(client = nil)
-          @client = client || ::Rubyists::Domeapi::Client.new
+          @client = client || Client.new
         end
       end
     end

@@ -6,7 +6,7 @@ describe Rubyists::Domeapi::Polymarket::Endpoint do
   it 'initializes with default client' do
     endpoint = Rubyists::Domeapi::Polymarket::Endpoint.new
 
-    _(endpoint.client).must_be_instance_of Rubyists::Domeapi::Client
+    _(endpoint.client).must_be_instance_of Rubyists::Domeapi::Polymarket::Client
   end
 
   it 'initializes with provided client' do

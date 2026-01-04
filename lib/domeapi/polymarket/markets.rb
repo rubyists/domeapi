@@ -4,12 +4,10 @@ module Rubyists
   module Domeapi
     module Polymarket
       # Markets API endpoints
-      class Markets
+      class Markets < Endpoint
         include Listable
 
         polymarket_path 'markets'
-
-        attr_reader :client
 
         # Filter for Polymarket markets,
         # from https://docs.domeapi.io/api-reference/endpoint/get-markets
@@ -24,13 +22,6 @@ module Rubyists
             end
             # :nocov:
           end
-        end
-
-        # @param client [Rubyists::Domeapi::Polymarket::Client]
-        #
-        # @return [void]
-        def initialize(client = Rubyists::Domeapi::Polymarket::Client.new)
-          @client = client
         end
 
         # Fetch current or historical price for a market
