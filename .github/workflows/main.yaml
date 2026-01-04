@@ -15,12 +15,25 @@ jobs:
           - '4.0.0'
     steps:
       - uses: actions/checkout@v4
+        name: Checkout code
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler-cache: false
+          bundler-cache: true
+
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
-      - name: Run the default task
+
+      - name: Run the default rake task
         run: bundle exec rake
+        env:
+          COVERAGE: "true"
+
+      - name: Check SimpleCov coverage
+        uses: joshmfrankel/simplecov-check-action@main
+        with:
+          minimum_suite_coverage: 97
+          minimum_file_coverage: 90
+          github_token: ${{ secrets.GITHUB_TOKEN }}
