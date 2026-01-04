@@ -16,7 +16,6 @@ module Rubyists
           propertize(%i[market_slug condition_id token_id start_time end_time limit offset user])
 
           validation do
-            # :nocov:
             params do
               optional(:market_slug).maybe(:string)
               optional(:condition_id).maybe(:string)
@@ -27,7 +26,6 @@ module Rubyists
               optional(:offset).maybe(:integer, gteq?: 0)
               optional(:user).maybe(:string)
             end
-            # :nocov:
           end
         end
       end

@@ -32,4 +32,8 @@ describe Rubyists::Domeapi::Client do
   it 'returns a polymarket client' do
     _(client.polymarket).must_be_instance_of Rubyists::Domeapi::Polymarket::Client
   end
+
+  it 'returns a matching_markets client' do
+    _(client.matching_markets).must_be_instance_of Rubyists::Domeapi::MatchingMarkets
+  end
 end
