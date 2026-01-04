@@ -10,12 +10,8 @@ jobs:
   validate_ruby:
     name: Ruby Tests
     uses: ./.github/workflows/main.yaml
+
   ensure_coverage:
     needs: validate_ruby
-    steps:
-      - name: Check SimpleCov coverage
-        uses: joshmfrankel/simplecov-check-action@main
-        with:
-          minimum_suite_coverage: 97
-          minimum_file_coverage: 90
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    name: Check SimpleCov coverage
+    uses: ./.github/workflows/coverage.yaml

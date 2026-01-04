@@ -1,0 +1,17 @@
+name: Test Coverage
+
+on:
+  workflow_call:
+
+  workflow_dispatch:
+
+jobs:
+  SimpleCov:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check SimpleCov coverage
+        uses: joshmfrankel/simplecov-check-action@main
+        with:
+          minimum_suite_coverage: 97
+          minimum_file_coverage: 90
+          github_token: ${{ secrets.GITHUB_TOKEN }}
