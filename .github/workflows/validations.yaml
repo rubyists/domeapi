@@ -10,3 +10,8 @@ jobs:
   validate_ruby:
     name: Ruby Tests
     uses: ./.github/workflows/main.yaml
+
+  ensure_coverage:
+    needs: validate_ruby
+    name: Check SimpleCov coverage
+    uses: ./.github/workflows/coverage.yaml

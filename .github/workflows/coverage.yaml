@@ -1,0 +1,24 @@
+name: Test Coverage
+
+on:
+  workflow_call:
+
+  workflow_dispatch:
+
+jobs:
+  SimpleCov:
+    runs-on: ubuntu-latest
+    steps:
+      # Only download these artifacts if they don't already exist
+      - if: ${{ hashFiles('coverage/.last_run.json') == '' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-last-run
+          path: coverage/
+
+      - name: Check SimpleCov coverage
+        uses: joshmfrankel/simplecov-check-action@main
+        with:
+          minimum_suite_coverage: 97
+          minimum_file_coverage: 90
+          github_token: ${{ secrets.GITHUB_TOKEN }}

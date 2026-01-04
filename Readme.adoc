@@ -102,6 +102,22 @@ filter = Rubyists::Domeapi::Polymarket::TradeHistory::Filter.new(
 trades = client.polymarket.trade_history.list(filter)
 ----
 
+==== Orderbook
+
+Get orderbook history:
+
+[source,ruby]
+----
+filter = Rubyists::Domeapi::Polymarket::Orderbook::Filter.new(
+  Rubyists::Domeapi::Polymarket::Orderbook::Filter::Properties.new(
+    token_id: 'token_id',
+    start_time: 1625097600000,
+    end_time: 1625184000000
+  )
+)
+snapshots = client.polymarket.orderbook.list(filter)
+----
+
 == Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

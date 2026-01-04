@@ -29,6 +29,7 @@ GEM
     disposable (0.6.3)
       declarative (>= 0.0.9, < 1.0.0)
       representable (>= 3.1.1, < 4)
+    docile (1.4.1)
     dry-cli (1.3.0)
     dry-configurable (1.3.0)
       dry-core (~> 1.1)
@@ -135,6 +136,16 @@ GEM
     ruby-progressbar (1.13.0)
     semantic_logger (4.17.0)
       concurrent-ruby (~> 1.0)
+    shoulda-context (2.0.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.2)
+    simplecov-json (0.2.3)
+      json
+      simplecov
+    simplecov_json_formatter (0.1.4)
     trailblazer (2.1.3)
       trailblazer-activity-dsl-linear (>= 1.2.3, < 1.3.0)
       trailblazer-developer (>= 0.1.0, < 0.2.0)
@@ -187,6 +198,9 @@ DEPENDENCIES
   rubocop-minitest
   rubocop-performance
   rubocop-rake
+  shoulda-context
+  simplecov
+  simplecov-json
 
 CHECKSUMS
   addressable (2.8.8) sha256=7c13b8f9536cf6364c03b9d417c19986019e28f7c00ac8132da4eb0fe393b057
@@ -197,6 +211,7 @@ CHECKSUMS
   crack (1.0.1) sha256=ff4a10390cd31d66440b7524eb1841874db86201d5b70032028553130b6d4c7e
   declarative (0.0.20) sha256=8021dd6cb17ab2b61233c56903d3f5a259c5cf43c80ff332d447d395b17d9ff9
   disposable (0.6.3) sha256=7f2a3fb251bff6cd83f25b164043d4ec3531209b51b066ed476a9df9c2d384cc
+  docile (1.4.1) sha256=96159be799bfa73cdb721b840e9802126e4e03dfc26863db73647204c727f21e
   domeapi (0.0.2)
   dry-cli (1.3.0) sha256=984a715f9d7f8d9bf87b6530acdd4321dcf747636bfeb3ea7fd1b81bc0226e84
   dry-configurable (1.3.0) sha256=882d862858567fc1210d2549d4c090f34370fc1bb7c5c1933de3fe792e18afa8
@@ -241,6 +256,11 @@ CHECKSUMS
   rubocop-rake (0.7.1) sha256=3797f2b6810c3e9df7376c26d5f44f3475eda59eb1adc38e6f62ecf027cbae4d
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
   semantic_logger (4.17.0) sha256=c54b60d8596abe2e22bd4f20648d4f6c46e4287fba357779c7932335c8d130e9
+  shoulda-context (2.0.0) sha256=7adf45342cd800f507d2a053658cb1cce2884b616b26004d39684b912ea32c34
+  simplecov (0.22.0) sha256=fe2622c7834ff23b98066bb0a854284b2729a569ac659f82621fc22ef36213a5
+  simplecov-html (0.13.2) sha256=bd0b8e54e7c2d7685927e8d6286466359b6f16b18cb0df47b508e8d73c777246
+  simplecov-json (0.2.3) sha256=c63823b5dfc95c85ff4cb94251765f08a166bdd68098f259368cbfe738e281f7
+  simplecov_json_formatter (0.1.4) sha256=529418fbe8de1713ac2b2d612aa3daa56d316975d307244399fa4838c601b428
   trailblazer (2.1.3) sha256=8adf157f552a4843de51456f7e70e28422799e5d060b265814d145774b8845b7
   trailblazer-activity (0.17.0) sha256=2166bc8b3410b808ad2bfe00efaf559533d1b9a6fb0d704cf3bdad02cd6c0b88
   trailblazer-activity-dsl-linear (1.2.6) sha256=42e4d3c9bd9469b65f9265fba74c703cf1a4117ea7f42a0a78112ebb3bab986f

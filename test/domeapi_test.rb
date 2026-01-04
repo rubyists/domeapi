@@ -11,6 +11,10 @@ module Rubyists
         refute_nil subject::VERSION
       end
 
+      it 'returns a default client' do
+        _(subject.client).must_be_instance_of Rubyists::Domeapi::Client
+      end
+
       describe 'VERSION' do
         subject { ::Rubyists::Domeapi::VERSION }
 

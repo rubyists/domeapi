@@ -48,6 +48,16 @@ describe Rubyists::Domeapi::Client do
       _(response).must_equal({ candlesticks: [] })
     end
 
+    it 'gets candlesticks with hash filter' do
+      stub_request(:get, 'https://api.domeapi.io/v1/polymarket/markets/get_candlesticks')
+        .with(query: { condition_id: 'abc', start_time: '100', end_time: '200' })
+        .to_return(status: 200, body: '{"candlesticks": []}')
+
+      response = candlesticks.list(condition_id: 'abc', start_time: 100, end_time: 200)
+
+      _(response).must_equal({ candlesticks: [] })
+    end
+
     it 'validates required parameters' do
       filter = Rubyists::Domeapi::Polymarket::Candlesticks::Filter.new(
         Rubyists::Domeapi::Polymarket::Candlesticks::Filter::Properties.new

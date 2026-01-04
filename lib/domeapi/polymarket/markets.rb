@@ -4,61 +4,24 @@ module Rubyists
   module Domeapi
     module Polymarket
       # Markets API endpoints
-      class Markets
-        attr_reader :client
+      class Markets < Endpoint
+        include Listable
+
+        polymarket_path 'markets'
 
         # Filter for Polymarket markets,
         # from https://docs.domeapi.io/api-reference/endpoint/get-markets
         class Filter < Contract
-          Properties = Struct.new(
-            :market_slug,
-            :event_slug,
-            :condition_id,
-            :tags,
-            :status,
-            :min_volume,
-            :limit,
-            :offset,
-            :start_time,
-            :end_time,
-            keyword_init: true
-          )
-
-          # Define properties with custom populator to skip optional params with nil values
-          Properties.members.each do |member|
-            property member, populator: ->(value:, **) { value || skip! }
-          end
+          propertize(%i[market_slug event_slug condition_id tags status min_volume limit offset start_time end_time])
 
           validation do
+            # :nocov:
             params do
               optional(:status).maybe(:string, included_in?: %w[open closed])
               optional(:offset).maybe(:integer, gteq?: 0, lteq?: 100)
             end
+            # :nocov:
           end
-        end
-
-        class << self
-          # @see #list
-          def list(...)
-            new.list(...)
-          end
-        end
-
-        # @param client [Rubyists::Domeapi::Polymarket::Client]
-        #
-        # @return [void]
-        def initialize(client = Rubyists::Domeapi::Polymarket::Client.new)
-          @client = client
-        end
-
-        # List markets
-        # @param filter [MarketFilter] Filter options
-        #
-        # @return [Array<Polymarket::Market>] list of markets
-        def list(filter = Filter.new(Filter::Properties.new))
-          raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.valid?
-
-          client.get('markets', params: filter.to_h)
         end
 
         # Fetch current or historical price for a market
