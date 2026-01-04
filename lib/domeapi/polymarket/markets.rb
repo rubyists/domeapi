@@ -15,12 +15,10 @@ module Rubyists
           propertize(%i[market_slug event_slug condition_id tags status min_volume limit offset start_time end_time])
 
           validation do
-            # :nocov:
             params do
               optional(:status).maybe(:string, included_in?: %w[open closed])
               optional(:offset).maybe(:integer, gteq?: 0, lteq?: 100)
             end
-            # :nocov:
           end
         end
 

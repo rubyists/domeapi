@@ -14,12 +14,10 @@ module Rubyists
           propertize(%i[token_id at_time])
 
           validation do
-            # :nocov:
             params do
               required(:token_id).filled(:string)
               optional(:at_time).maybe(:integer)
             end
-            # :nocov:
           end
         end
       end

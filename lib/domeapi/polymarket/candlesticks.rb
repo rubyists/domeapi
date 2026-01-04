@@ -15,14 +15,12 @@ module Rubyists
           propertize(%i[condition_id start_time end_time interval])
 
           validation do
-            # :nocov:
             params do
               required(:condition_id).filled(:string)
               required(:start_time).filled(:integer)
               required(:end_time).filled(:integer)
               optional(:interval).maybe(:integer, gteq?: 1, lteq?: 1440)
             end
-            # :nocov:
           end
         end
       end

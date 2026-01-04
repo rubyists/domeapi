@@ -11,12 +11,10 @@ module Rubyists
         propertize(%i[sport date])
 
         validation do
-          # :nocov:
           params do
             required(:sport).filled(:string, included_in?: SPORTS)
             required(:date).filled(:string, format?: /\A\d{4}-\d{2}-\d{2}\z/)
           end
-          # :nocov:
         end
       end
 
@@ -25,7 +23,6 @@ module Rubyists
         propertize(%i[polymarket_market_slug kalshi_event_ticker])
 
         validation do
-          # :nocov:
           params do
             optional(:polymarket_market_slug).maybe(Types::PolymarketMarketSlug)
             optional(:kalshi_event_ticker).maybe(Types::KalshiEventTicker)
@@ -36,7 +33,6 @@ module Rubyists
               key.failure('Either polymarket_market_slug or kalshi_event_ticker must be provided')
             end
           end
-          # :nocov:
         end
       end
 
