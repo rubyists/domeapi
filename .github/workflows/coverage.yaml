@@ -9,12 +9,18 @@ jobs:
   SimpleCov:
     runs-on: ubuntu-latest
     steps:
-      # Only download this if the coverage/ directory isn't populated
-      - if: ${{ hashFiles('coverage/**') == '' }}
+      # Only download these artifacts if they don't already exist
+      - if: ${{ hashFiles('coverage/.last_run.json') == '' }}
         uses: actions/download-artifact@v4
         with:
-          name: coverage-report
-          path: .
+          name: coverage-last-run
+          path: coverage/.last_run.json
+
+      - if: ${{ hashFiles('coverage/coverage.json') == '' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-full-results
+          path: coverage/coverage.json
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3

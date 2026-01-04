@@ -31,8 +31,14 @@ jobs:
         env:
           COVERAGE: "true"
 
-      - name: Upload coverage results
+      - name: Upload coverage last run
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: coverage/
+          name: coverage-last-run
+          path: coverage/.last_run.json
+
+      - name: Upload full coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-full-results
+          path: coverage/coverage.json
