@@ -5,6 +5,10 @@ module Rubyists
     module Polymarket
       # Orderbook API endpoints
       class Orderbook
+        include Listable
+
+        polymarket_path 'markets/get_orderbook_history'
+
         attr_reader :client
 
         # @param client [Rubyists::Domeapi::Polymarket::Client]
@@ -43,11 +47,12 @@ module Rubyists
         # @param filter [Filter] Filter options
         #
         # @return [Hash] orderbook history data
-        def list(filter = Filter.new(Filter::Properties.new))
-          raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.validate({})
-
-          client.get('markets/get_orderbook_history', params: filter.to_h)
-        end
+        # def list(filter = Filter.new(Filter::Properties.new))
+        #   filter = Filter.new(Filter::Properties.new(**filter)) if filter.is_a?(Hash)
+        #   raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.validate({})
+        #
+        #   client.get('markets/get_orderbook_history', params: filter.to_h)
+        # end
       end
     end
   end

@@ -5,6 +5,10 @@ module Rubyists
     module Polymarket
       # Candlesticks API endpoints
       class Candlesticks < Endpoint
+        include Listable
+
+        polymarket_path 'markets/get_candlesticks'
+
         # Filter for listing candlesticks,
         # from https://docs.domeapi.io/api-reference/endpoint/get-candlesticks
         class Filter < Contract
@@ -33,11 +37,12 @@ module Rubyists
         # @param filter [Filter] Filter options
         #
         # @return [Candlestick] The candlestick data
-        def list(filter = Filter.new(Filter::Properties.new))
-          raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.valid?
-
-          client.get('markets/get_candlesticks', params: filter.to_h)
-        end
+        # def list(filter = Filter.new(Filter::Properties.new))
+        #   filter = Filter.new(Filter::Properties.new(**filter)) if filter.is_a?(Hash)
+        #   raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.valid?
+        #
+        #   client.get('markets/get_candlesticks', params: filter.to_h)
+        # end
       end
     end
   end

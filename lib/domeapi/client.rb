@@ -25,7 +25,7 @@ module Rubyists
       end
 
       def polymarket
-        @polymarket ||= Polymarket::Client.new(self)
+        @polymarket ||= Polymarket::Client.new(clone)
       end
 
       private

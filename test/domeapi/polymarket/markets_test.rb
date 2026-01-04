@@ -50,5 +50,15 @@ describe Rubyists::Domeapi::Client do
 
       _(response).must_equal([{ id: 'market1' }])
     end
+
+    it 'lists markets with hash filter' do
+      stub_request(:get, 'https://api.domeapi.io/v1/polymarket/markets')
+        .with(query: { tags: 'nfl' })
+        .to_return(status: 200, body: '[{"id": "market1"}]')
+
+      response = markets.list(tags: 'nfl')
+
+      _(response).must_equal([{ id: 'market1' }])
+    end
   end
 end

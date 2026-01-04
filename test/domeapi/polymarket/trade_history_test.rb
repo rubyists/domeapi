@@ -29,6 +29,16 @@ describe Rubyists::Domeapi::Client do
       _(response).must_equal({ trades: [] })
     end
 
+    it 'gets trade history with hash filter' do
+      stub_request(:get, 'https://api.domeapi.io/v1/polymarket/markets/get_trade_history')
+        .with(query: { market_slug: 'slug', limit: '10' })
+        .to_return(status: 200, body: '{"trades": []}')
+
+      response = trade_history.list(market_slug: 'slug', limit: 10)
+
+      _(response).must_equal({ trades: [] })
+    end
+
     it 'validates limit range' do
       filter = Rubyists::Domeapi::Polymarket::TradeHistory::Filter.new(
         Rubyists::Domeapi::Polymarket::TradeHistory::Filter::Properties.new(limit: 1001)

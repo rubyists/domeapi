@@ -5,6 +5,10 @@ module Rubyists
     module Polymarket
       # Markets API endpoints
       class Markets
+        include Listable
+
+        polymarket_path 'markets'
+
         attr_reader :client
 
         # Filter for Polymarket markets,
@@ -49,16 +53,6 @@ module Rubyists
         # @return [void]
         def initialize(client = Rubyists::Domeapi::Polymarket::Client.new)
           @client = client
-        end
-
-        # List markets
-        # @param filter [MarketFilter] Filter options
-        #
-        # @return [Array<Polymarket::Market>] list of markets
-        def list(filter = Filter.new(Filter::Properties.new))
-          raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.valid?
-
-          client.get('markets', params: filter.to_h)
         end
 
         # Fetch current or historical price for a market
