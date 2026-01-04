@@ -7,6 +7,37 @@ module Rubyists
       class Markets
         attr_reader :client
 
+        # Filter for Polymarket markets,
+        # from https://docs.domeapi.io/api-reference/endpoint/get-markets
+        class Filter < Contract
+          Properties = Struct.new(
+            *custom_definitions,
+            :market_slug,
+            :event_slug,
+            :condition_id,
+            :tags,
+            :status,
+            :min_volume,
+            :limit,
+            :offset,
+            :start_time,
+            :end_time,
+            keyword_init: true
+          )
+
+          # Define properties with custom populator to skip optional params with nil values
+          (Properties.members - custom_definitions).each do |member|
+            property member, populator: ->(value:, **) { value || skip! }
+          end
+
+          validation do
+            params do
+              optional(:status).maybe(:string, included_in?: %w[open closed])
+              optional(:offset).maybe(:integer, gteq?: 0, lteq?: 100)
+            end
+          end
+        end
+
         class << self
           # @see #list
           def list(...)
@@ -25,8 +56,8 @@ module Rubyists
         # @param filter [MarketFilter] Filter options
         #
         # @return [Array<Polymarket::Market>] list of markets
-        def list(filter = MarketFilter.new(MarketFilter::Properties.new))
-          raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.validate({})
+        def list(filter = Filter.new(Filter::Properties.new))
+          raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.valid?
 
           client.get('markets', params: filter.to_h)
         end
@@ -41,24 +72,6 @@ module Rubyists
           params = { token_id: token_id }
           params[:at_time] = at_time if at_time
           client.get('markets/get_market_price', params: params)
-        end
-
-        # Get OHLC candlesticks
-        #
-        # @param condition_id [String]
-        # @param start_time [Integer]
-        # @param end_time [Integer]
-        # @param interval [Integer]
-        #
-        # @return [Hash] candlestick data
-        def candlesticks(condition_id:, start_time:, end_time:, interval:)
-          params = {
-            condition_id: condition_id,
-            start_time: start_time,
-            end_time: end_time,
-            interval: interval
-          }
-          client.get('markets/get_candlesticks', params: params)
         end
       end
     end

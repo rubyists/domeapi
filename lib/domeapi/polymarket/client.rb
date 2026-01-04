@@ -20,8 +20,8 @@ module Rubyists
           @markets ||= Markets.new(client)
         end
 
-        def orders
-          @orders ||= Orders.new(client)
+        def candlesticks
+          @candlesticks ||= Candlesticks.new(client)
         end
       end
     end

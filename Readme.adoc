@@ -76,24 +76,15 @@ Get candlesticks:
 
 [source,ruby]
 ----
-candlesticks = client.polymarket.markets.candlesticks(
-  condition_id: 'condition_id',
-  start_time: 1625097600,
-  end_time: 1625184000,
-  interval: 60
+filter = Rubyists::Domeapi::Polymarket::Candlesticks::Filter.new(
+  Rubyists::Domeapi::Polymarket::Candlesticks::Filter::Properties.new(
+    condition_id: 'condition_id',
+    start_time: 1625097600,
+    end_time: 1625184000,
+    interval: 60
+  )
 )
-----
-
-==== Orders
-
-List orders:
-
-[source,ruby]
-----
-orders = client.polymarket.orders.list(
-  market_slug: 'market_slug',
-  limit: 10
-)
+candlesticks = client.polymarket.candlesticks.get(filter)
 ----
 
 == Development
