@@ -14,13 +14,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: coverage-last-run
-          path: coverage/.last_run.json
-
-      - if: ${{ hashFiles('coverage/coverage.json') == '' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage-full-results
-          path: coverage/coverage.json
+          path: coverage/
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
