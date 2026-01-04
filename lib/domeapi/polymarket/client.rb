@@ -27,6 +27,10 @@ module Rubyists
         def trade_history
           @trade_history ||= TradeHistory.new(client)
         end
+
+        def orderbook
+          @orderbook ||= Orderbook.new(client)
+        end
       end
     end
   end
