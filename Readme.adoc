@@ -84,7 +84,22 @@ filter = Rubyists::Domeapi::Polymarket::Candlesticks::Filter.new(
     interval: 60
   )
 )
-candlesticks = client.polymarket.candlesticks.get(filter)
+candlesticks = client.polymarket.candlesticks.list(filter)
+----
+
+==== Trade History
+
+Get trade history:
+
+[source,ruby]
+----
+filter = Rubyists::Domeapi::Polymarket::TradeHistory::Filter.new(
+  Rubyists::Domeapi::Polymarket::TradeHistory::Filter::Properties.new(
+    market_slug: 'market_slug',
+    limit: 10
+  )
+)
+trades = client.polymarket.trade_history.list(filter)
 ----
 
 == Development

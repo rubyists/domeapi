@@ -42,7 +42,7 @@ module Rubyists
         # @param filter [Filter] Filter options
         #
         # @return [Hash] candlestick data
-        def get(filter = Filter.new(Filter::Properties.new))
+        def list(filter = Filter.new(Filter::Properties.new))
           raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.valid?
 
           client.get('markets/get_candlesticks', params: filter.to_h)

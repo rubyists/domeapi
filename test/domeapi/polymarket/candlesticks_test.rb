@@ -26,7 +26,7 @@ describe Rubyists::Domeapi::Client do
           interval: 60
         )
       )
-      response = candlesticks.get(filter)
+      response = candlesticks.list(filter)
 
       _(response).must_equal({ candlesticks: [] })
     end
@@ -43,7 +43,7 @@ describe Rubyists::Domeapi::Client do
           end_time: 200
         )
       )
-      response = candlesticks.get(filter)
+      response = candlesticks.list(filter)
 
       _(response).must_equal({ candlesticks: [] })
     end
@@ -53,7 +53,7 @@ describe Rubyists::Domeapi::Client do
         Rubyists::Domeapi::Polymarket::Candlesticks::Filter::Properties.new
       )
 
-      error = _ { candlesticks.get(filter) }.must_raise ArgumentError
+      error = _ { candlesticks.list(filter) }.must_raise ArgumentError
       _(error.message).must_include 'Condition Id must be filled'
       _(error.message).must_include 'Start Time must be filled'
       _(error.message).must_include 'End Time must be filled'
@@ -69,7 +69,7 @@ describe Rubyists::Domeapi::Client do
         )
       )
 
-      error = _ { candlesticks.get(filter) }.must_raise ArgumentError
+      error = _ { candlesticks.list(filter) }.must_raise ArgumentError
       _(error.message).must_include 'Interval must be less than or equal to 1440'
 
       filter = Rubyists::Domeapi::Polymarket::Candlesticks::Filter.new(
@@ -81,7 +81,7 @@ describe Rubyists::Domeapi::Client do
         )
       )
 
-      error = _ { candlesticks.get(filter) }.must_raise ArgumentError
+      error = _ { candlesticks.list(filter) }.must_raise ArgumentError
       _(error.message).must_include 'Interval must be greater than or equal to 1'
     end
   end

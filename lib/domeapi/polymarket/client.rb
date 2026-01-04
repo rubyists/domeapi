@@ -23,6 +23,10 @@ module Rubyists
         def candlesticks
           @candlesticks ||= Candlesticks.new(client)
         end
+
+        def trade_history
+          @trade_history ||= TradeHistory.new(client)
+        end
       end
     end
   end
