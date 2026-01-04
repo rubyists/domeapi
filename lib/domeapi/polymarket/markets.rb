@@ -11,7 +11,6 @@ module Rubyists
         # from https://docs.domeapi.io/api-reference/endpoint/get-markets
         class Filter < Contract
           Properties = Struct.new(
-            *custom_definitions,
             :market_slug,
             :event_slug,
             :condition_id,
@@ -26,7 +25,7 @@ module Rubyists
           )
 
           # Define properties with custom populator to skip optional params with nil values
-          (Properties.members - custom_definitions).each do |member|
+          Properties.members.each do |member|
             property member, populator: ->(value:, **) { value || skip! }
           end
 

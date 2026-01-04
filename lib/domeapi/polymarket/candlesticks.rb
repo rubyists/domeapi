@@ -4,17 +4,8 @@ module Rubyists
   module Domeapi
     module Polymarket
       # Candlesticks API endpoints
-      class Candlesticks
-        attr_reader :client
-
-        # @param client [Rubyists::Domeapi::Polymarket::Client]
-        #
-        # @return [void]
-        def initialize(client = Rubyists::Domeapi::Polymarket::Client.new)
-          @client = client
-        end
-
-        # Filter for candlestick data,
+      class Candlesticks < Endpoint
+        # Filter for listing candlesticks,
         # from https://docs.domeapi.io/api-reference/endpoint/get-candlesticks
         class Filter < Contract
           Properties = Struct.new(
@@ -41,7 +32,7 @@ module Rubyists
         #
         # @param filter [Filter] Filter options
         #
-        # @return [Hash] candlestick data
+        # @return [Candlestick] The candlestick data
         def list(filter = Filter.new(Filter::Properties.new))
           raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.valid?
 
