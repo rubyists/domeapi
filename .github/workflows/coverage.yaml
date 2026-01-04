@@ -14,6 +14,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: coverage-report
+          path: .
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - name: Check SimpleCov coverage
         uses: joshmfrankel/simplecov-check-action@main
