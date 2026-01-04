@@ -9,12 +9,12 @@ Gem::Specification.new do |spec|
   spec.email = ['bougyman@users.noreply.github.com']
 
   spec.summary = 'Ruby SDK for domeapi.io (unofficial).'
-  spec.homepage = 'https://github.com/bougyman/domeapi'
+  spec.homepage = 'https://github.com/rubyists/domeapi'
   spec.required_ruby_version = '>= 4.0'
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org'
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/bougyman/domeapi'
+  spec.metadata['source_code_uri'] = 'https://github.com/rubyists/domeapi'
   spec.metadata['rubygems_mfa_required'] = 'true'
 
   # Specify which files should be added to the gem when it is released.

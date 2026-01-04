@@ -6,6 +6,7 @@ module Rubyists
       # Filter for Polymarket markets
       class MarketFilter < Contract
         Properties = Struct.new(
+          *custom_definitions,
           :market_slug,
           :event_slug,
           :condition_id,
@@ -19,7 +20,10 @@ module Rubyists
           keyword_init: true
         )
 
-        Properties.members.each { |member| property member, populator: ->(model:, **) { model || skip! } }
+        # Define properties with custom populator to skip optional params with nil values
+        (Properties.members - custom_definitions).each do |member|
+          property member, populator: ->(value:, **) { value || skip! }
+        end
 
         validation do
           params do
