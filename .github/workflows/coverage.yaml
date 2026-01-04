@@ -16,9 +16,6 @@ jobs:
           name: coverage-last-run
           path: coverage/
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Check SimpleCov coverage
         uses: joshmfrankel/simplecov-check-action@main
         with:
