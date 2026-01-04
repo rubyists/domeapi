@@ -1,0 +1,44 @@
+---
+plugins:
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-rake
+
+AllCops:
+  TargetRubyVersion: 4
+  NewCops: enable
+  SuggestExtensions: false
+
+Metrics/ClassLength:
+  CountAsOne: ['array', 'heredoc', 'hash']
+  Max: 115
+
+Metrics/ModuleLength:
+  CountAsOne: ['array', 'heredoc', 'hash']
+  Max: 115
+  Exclude:
+  - 'spec/**/*.rb'
+
+Metrics/MethodLength:
+  CountAsOne: ['array', 'heredoc', 'hash']
+
+Metrics/BlockLength:
+  CountAsOne: ['array', 'heredoc', 'hash']
+  Exclude:
+    - 'test/**/*'
+    - '*.gemspec'
+
+Layout/LineLength:
+  Max: 120
+  AllowedPatterns: ['\A#']
+
+Style/CommentedKeyword:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: double_quotes
