@@ -1,0 +1,107 @@
+= Domeapi
+:toc: macro
+
+Ruby client for the Domeapi API.
+
+== Installation
+
+Install the gem and add to the application's Gemfile by executing:
+
+[source,bash]
+----
+bundle add domeapi
+----
+
+If bundler is not being used to manage dependencies, install the gem by executing:
+
+[source,bash]
+----
+gem install domeapi
+----
+
+== Usage
+
+=== Configuration
+
+Configure the gem with your API key. You can set it via the `DOMEAPI_API_KEY` environment variable or configure it explicitly:
+
+[source,ruby]
+----
+Rubyists::Domeapi.configure do |config|
+  config.api_key = 'your_api_key'
+end
+----
+
+=== Client
+
+Initialize the client:
+
+[source,ruby]
+----
+client = Rubyists::Domeapi.client
+----
+
+=== Polymarket
+
+Access Polymarket endpoints via the `polymarket` namespace.
+
+==== Markets
+
+List markets with optional filtering:
+
+[source,ruby]
+----
+# List markets with default filter
+markets = client.polymarket.markets.list
+
+# List markets with custom filter
+filter = Rubyists::Domeapi::Polymarket::MarketFilter.new(
+  Rubyists::Domeapi::Polymarket::MarketFilter::Properties.new(
+    limit: 10,
+    offset: 0,
+    status: 'open'
+  )
+)
+markets = client.polymarket.markets.list(filter)
+----
+
+Get market price:
+
+[source,ruby]
+----
+price = client.polymarket.markets.price(token_id: 'token_id')
+----
+
+Get candlesticks:
+
+[source,ruby]
+----
+candlesticks = client.polymarket.markets.candlesticks(
+  condition_id: 'condition_id',
+  start_time: 1625097600,
+  end_time: 1625184000,
+  interval: 60
+)
+----
+
+==== Orders
+
+List orders:
+
+[source,ruby]
+----
+orders = client.polymarket.orders.list(
+  market_slug: 'market_slug',
+  limit: 10
+)
+----
+
+== Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+== Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/bougyman/domeapi.
