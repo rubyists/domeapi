@@ -9,8 +9,8 @@ jobs:
   SimpleCov:
     runs-on: ubuntu-latest
     steps:
-      # Only download this if the coverage/ directory isn't present
-      - if: ${{ !exists('coverage/index.html') }}
+      # Only download this if the coverage/ directory isn't populated
+      - if: ${{ hashFiles('coverage/**') == '' }}
         uses: actions/download-artifact@v4
         with:
           name: coverage-report
