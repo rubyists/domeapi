@@ -28,6 +28,10 @@ module Rubyists
         @polymarket ||= Polymarket::Client.new(clone)
       end
 
+      def matching_markets
+        @matching_markets ||= MatchingMarkets.new(self)
+      end
+
       private
 
       def full_url(path)

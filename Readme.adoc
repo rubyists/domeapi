@@ -167,6 +167,41 @@ pnl = client.polymarket.wallet_profit_and_loss.list(
 )
 ----
 
+=== Matching Markets
+
+Access Matching Markets endpoints via the `matching_markets` namespace.
+
+==== Sports
+
+[API Reference](https://docs.domeapi.io/api-reference/endpoint/get-matching-markets-sports)
+
+List matching markets for a specific sport and date:
+
+[source,ruby]
+----
+# Using dynamic methods
+markets = client.matching_markets.nfl_on(Date.today)
+markets = client.matching_markets.nba_on('2023-12-25')
+
+# Using sports_by_date method
+markets = client.matching_markets.sports_by_date(sport: 'nfl', date: Date.today)
+----
+
+==== Markets
+
+[API Reference](https://docs.domeapi.io/api-reference/endpoint/get-matching-markets)
+
+List matching markets by slug or ticker:
+
+[source,ruby]
+----
+# By Polymarket slug
+markets = client.matching_markets.sports(polymarket_market_slug: 'super-bowl-lviii-winner')
+
+# By Kalshi ticker
+markets = client.matching_markets.sports(kalshi_event_ticker: 'SB58')
+----
+
 == Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
