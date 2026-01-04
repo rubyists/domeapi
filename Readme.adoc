@@ -189,7 +189,7 @@ markets = client.matching_markets.sports_by_date(sport: 'nfl', date: Date.today)
 
 ==== Markets
 
-[API Reference](https://docs.domeapi.io/api-reference/endpoint/get-matching-markets)
+https://docs.domeapi.io/api-reference/endpoint/get-matching-markets[API Reference]
 
 List matching markets by slug or ticker:
 
