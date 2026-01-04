@@ -21,6 +21,10 @@ module Rubyists
           def polymarket_path(path)
             self.endpoint_path = path
           end
+
+          def list(...)
+            new.list(...)
+          end
         end
 
         # List resources

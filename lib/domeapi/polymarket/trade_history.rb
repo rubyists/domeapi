@@ -4,37 +4,19 @@ module Rubyists
   module Domeapi
     module Polymarket
       # Trade History API endpoints
-      class TradeHistory
+      class TradeHistory < Endpoint
         include Listable
 
         polymarket_path 'markets/get_trade_history'
 
         attr_reader :client
 
-        # @param client [Rubyists::Domeapi::Polymarket::Client]
-        #
-        # @return [void]
-        def initialize(client = Rubyists::Domeapi::Polymarket::Client.new)
-          @client = client
-        end
-
         # Filter for trade history
         class Filter < Contract
-          Properties = Struct.new(
-            :market_slug,
-            :condition_id,
-            :token_id,
-            :start_time,
-            :end_time,
-            :limit,
-            :offset,
-            :user,
-            keyword_init: true
-          )
-
-          Properties.members.each { |member| property member, populator: ->(model:, **) { model || skip! } }
+          propertize(%i[market_slug condition_id token_id start_time end_time limit offset user])
 
           validation do
+            # :nocov:
             params do
               optional(:market_slug).maybe(:string)
               optional(:condition_id).maybe(:string)
@@ -45,20 +27,9 @@ module Rubyists
               optional(:offset).maybe(:integer, gteq?: 0)
               optional(:user).maybe(:string)
             end
+            # :nocov:
           end
         end
-
-        # Get trade history
-        #
-        # @param filter [Filter] Filter options
-        #
-        # @return [Hash] trade history data
-        # def list(filter = Filter.new(Filter::Properties.new))
-        #   filter = Filter.new(Filter::Properties.new(**filter)) if filter.is_a?(Hash)
-        #   raise ArgumentError, filter.errors.full_messages.join(', ') unless filter.validate({})
-        #
-        #   client.get('markets/get_trade_history', params: filter.to_h)
-        # end
       end
     end
   end

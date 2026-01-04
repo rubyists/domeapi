@@ -29,6 +29,16 @@ describe Rubyists::Domeapi::Client do
       _(response).must_equal({ price: 0.5 })
     end
 
+    it 'gets market price with at_time' do
+      stub_request(:get, 'https://api.domeapi.io/v1/polymarket/markets/get_market_price')
+        .with(query: { token_id: '123', at_time: '1625097600' })
+        .to_return(status: 200, body: '{"price": 0.4}')
+
+      response = markets.price(token_id: '123', at_time: 1_625_097_600)
+
+      _(response).must_equal({ price: 0.4 })
+    end
+
     it 'lists markets' do
       stub_request(:get, 'https://api.domeapi.io/v1/polymarket/markets')
         .with(query: { limit: '10', offset: '0' })
@@ -59,6 +69,12 @@ describe Rubyists::Domeapi::Client do
       response = markets.list(tags: 'nfl')
 
       _(response).must_equal([{ id: 'market1' }])
+    end
+
+    it 'initializes with default client' do
+      markets = Rubyists::Domeapi::Polymarket::Markets.new
+
+      _(markets.client).must_be_instance_of Rubyists::Domeapi::Polymarket::Client
     end
   end
 end

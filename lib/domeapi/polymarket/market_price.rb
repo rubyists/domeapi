@@ -11,19 +11,15 @@ module Rubyists
 
         # Filter for market price
         class Filter < Contract
-          Properties = Struct.new(
-            :token_id,
-            :at_time,
-            keyword_init: true
-          )
-
-          Properties.members.each { |member| property member, populator: ->(value:, **) { value || skip! } }
+          propertize(%i[token_id at_time])
 
           validation do
+            # :nocov:
             params do
               required(:token_id).filled(:string)
               optional(:at_time).maybe(:integer)
             end
+            # :nocov:
           end
         end
       end

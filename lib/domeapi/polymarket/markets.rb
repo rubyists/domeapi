@@ -14,37 +14,15 @@ module Rubyists
         # Filter for Polymarket markets,
         # from https://docs.domeapi.io/api-reference/endpoint/get-markets
         class Filter < Contract
-          Properties = Struct.new(
-            :market_slug,
-            :event_slug,
-            :condition_id,
-            :tags,
-            :status,
-            :min_volume,
-            :limit,
-            :offset,
-            :start_time,
-            :end_time,
-            keyword_init: true
-          )
-
-          # Define properties with custom populator to skip optional params with nil values
-          Properties.members.each do |member|
-            property member, populator: ->(value:, **) { value || skip! }
-          end
+          propertize(%i[market_slug event_slug condition_id tags status min_volume limit offset start_time end_time])
 
           validation do
+            # :nocov:
             params do
               optional(:status).maybe(:string, included_in?: %w[open closed])
               optional(:offset).maybe(:integer, gteq?: 0, lteq?: 100)
             end
-          end
-        end
-
-        class << self
-          # @see #list
-          def list(...)
-            new.list(...)
+            # :nocov:
           end
         end
 

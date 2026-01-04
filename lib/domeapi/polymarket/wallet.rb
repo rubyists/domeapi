@@ -11,18 +11,10 @@ module Rubyists
 
         # Filter for wallet
         class Filter < Contract
-          Properties = Struct.new(
-            :eoa,
-            :proxy,
-            :with_metrics,
-            :start_time,
-            :end_time,
-            keyword_init: true
-          )
-
-          Properties.members.each { |member| property member, populator: ->(value:, **) { value || skip! } }
+          propertize(%i[eoa proxy with_metrics start_time end_time])
 
           validation do
+            # :nocov:
             params do
               optional(:eoa).maybe(:string)
               optional(:proxy).maybe(:string)
@@ -35,6 +27,7 @@ module Rubyists
               key.failure('Either eoa or proxy must be provided, but not both') if values[:eoa] && values[:proxy]
               key.failure('Either eoa or proxy must be provided') if !values[:eoa] && !values[:proxy]
             end
+            # :nocov:
           end
         end
       end
