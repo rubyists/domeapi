@@ -9,6 +9,12 @@ jobs:
   SimpleCov:
     runs-on: ubuntu-latest
     steps:
+      # Only download this if the coverage/ directory isn't present
+      - if: !exists('coverage/index.html')
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+
       - name: Check SimpleCov coverage
         uses: joshmfrankel/simplecov-check-action@main
         with:
