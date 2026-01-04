@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/rubyists/domeapi/compare/v0.0.3...v0.0.4) (2026-01-04)
+
+
+### Features
+
+* adds matching markets for sports by date, ticker, or slug ([#7](https://github.com/rubyists/domeapi/issues/7)) ([f47d173](https://github.com/rubyists/domeapi/commit/f47d173dcfa125348ec3695c28156827675a22e9))
+
 ## [0.0.3](https://github.com/rubyists/domeapi/compare/v0.0.2...v0.0.3) (2026-01-04)
 
 
